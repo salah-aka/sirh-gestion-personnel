@@ -8,11 +8,16 @@ import dev.ihm.options.OptionTerminer;
 import dev.service.IPlatService;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Menu {
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 
+@Controller
+public class Menu {
+	
     private Map<Integer, IOptionMenu> actions = new HashMap<>();
 
     private String menu;

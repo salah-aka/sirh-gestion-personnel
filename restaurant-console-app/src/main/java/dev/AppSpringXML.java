@@ -14,7 +14,6 @@ public class AppSpringXML {
       ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext ("application-config-memoire.xml");
    
       // récupération du bean Menu   
-		Scanner scanner = context.getBean(Scanner.class);
 		Menu menu = context.getBean(Menu.class);
       
        menu.afficher();
