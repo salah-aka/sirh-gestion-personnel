@@ -34,7 +34,7 @@ public class PlatServiceVersion1 implements IPlatService {
         // règle métier
 
         if (nomPlat.length() <= 3) {
-            throw new PlatException("un plat doit avoir un nom de plus de 3 caractères");
+            throw new PlatException("Le plat doit avoir un nom avec plus de 3 caractères");
         }
 
         if (prixPlat <= 500) {
