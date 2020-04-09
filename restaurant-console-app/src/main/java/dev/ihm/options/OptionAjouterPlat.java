@@ -5,9 +5,11 @@ import dev.service.IPlatService;
 
 import java.util.Scanner;
 
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Controller;
 
 @Controller
+@Order(10)
 public class OptionAjouterPlat implements IOptionMenu {
     private Scanner scanner;
 
