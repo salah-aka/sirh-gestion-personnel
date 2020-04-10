@@ -1,12 +1,16 @@
 package dev.dao;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+
+import dev.entite.Plat;
 
 /**
  * Test d'integration par spring de la classe PlatDaoFichier
@@ -16,25 +20,31 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
  */
 @SpringJUnitConfig(PlatDaoFichier.class)
 @TestPropertySource("classpath:test.properties")
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 
-class PlatDaoFichierTest {
+public class PlatDaoFichierTest {
 
 	@Autowired
-	PlatDaoFichier platDaoFichier;
+	private IPlatDao daoFichier;
 
 	@Test
 	void ajouterPlatCasPassants() {
 
-		platDaoFichier.ajouterPlat("Pizzaaa", 100000);
-		assertFalse(platDaoFichier.listerPlats().isEmpty());
+		Plat plat = new Plat("Pizzaaa", 100000);
+		List<Plat> listPlat = new ArrayList<>();
+		listPlat.add(plat);
+		daoFichier.ajouterPlat("Pizzaaa", 100000);
+		Assertions.assertThat(daoFichier.listerPlats()).isEqualTo(listPlat);
 	}
 
 	@Test
-	@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-	void ajouterPlatCasPassants1() {
+	void ajouterPlatCasPassantsInd() {
 
-		platDaoFichier.ajouterPlat("Pizzaaaz", 100000);
-		assertFalse(platDaoFichier.listerPlats().isEmpty());
+		Plat plat = new Plat("Pizzaaa", 100000);
+		List<Plat> listPlat = new ArrayList<>();
+		listPlat.add(plat);
+		daoFichier.ajouterPlat("Pizzaaa", 100000);
+		Assertions.assertThat(daoFichier.listerPlats()).isEqualTo(listPlat);
 	}
 
 }
