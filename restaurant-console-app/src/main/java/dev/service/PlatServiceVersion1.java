@@ -1,47 +1,43 @@
 package dev.service;
 
+import java.util.List;
+
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Service;
+
 import dev.dao.IPlatDao;
 import dev.entite.Plat;
 import dev.exception.PlatException;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 @Service
 @Profile("service1")
 public class PlatServiceVersion1 implements IPlatService {
 
-    private IPlatDao dao;
+	private IPlatDao dao;
 
-    public PlatServiceVersion1(@Qualifier ("platDaoFichier") IPlatDao dao) {
-        this.dao = dao;
-    }
+	public PlatServiceVersion1(IPlatDao dao) {
+		this.dao = dao;
+	}
 
-    @Override
-    public List<Plat> listerPlats() {
-        return dao.listerPlats();
-    }
+	@Override
+	public List<Plat> listerPlats() {
+		return dao.listerPlats();
+	}
 
-    @Override
-    public void ajouterPlat(String nomPlat, Integer prixPlat) {
+	@Override
+	public void ajouterPlat(String nomPlat, Integer prixPlat) {
 
-        // règle métier
+		// règle métier
 
-        if (nomPlat.length() <= 3) {
-            throw new PlatException("Le plat doit avoir un nom avec plus de 3 caractères");
-        }
+		if (nomPlat.length() <= 3) {
+			throw new PlatException("Le plat doit avoir un nom avec plus de 3 caractères");
+		}
 
-        if (prixPlat <= 500) {
-            throw new PlatException("le prix d'un plat doit être supérieur à 5 €");
-        }
+		if (prixPlat <= 500) {
+			throw new PlatException("le prix d'un plat doit être supérieur à 5 €");
+		}
 
-        // persistance uniquement si les règles métiers sont respectées
-        dao.ajouterPlat(nomPlat, prixPlat);
-    }
+		// persistance uniquement si les règles métiers sont respectées
+		dao.ajouterPlat(nomPlat, prixPlat);
+	}
 }
