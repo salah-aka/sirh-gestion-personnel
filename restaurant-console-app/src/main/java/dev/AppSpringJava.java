@@ -14,7 +14,6 @@ public class AppSpringJava {
 	public static void main(String[] args) {
 
 		// Création du contexte Spring à partir d'une configuration Java
-		// (DataSourceConfig)
 
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
