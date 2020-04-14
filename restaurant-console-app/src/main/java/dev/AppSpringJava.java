@@ -8,19 +8,26 @@ import dev.config.AppConfig;
 import dev.ihm.Menu;
 
 public class AppSpringJava {
+
+//	private static final Logger LOGGER = Logger.getLogger(AppSpringJava.class.getName());
+
 	public static void main(String[] args) {
 
 		// Création du contexte Spring à partir d'une configuration Java
-		
+		// (DataSourceConfig)
+
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-		
-		// récupération du bean Menu
+
+		// récupération du bean Menu  
 		Menu menu = context.getBean(Menu.class);
+
 		menu.afficher();
-		
-		// fermeture du Scanner
+
+		// fermeture du Scanner  
 		context.getBean(Scanner.class).close();
-		// fermeture du contexte Spring
+
+		// fermeture du contexte Spring  
 		context.close();
+
 	}
 }
