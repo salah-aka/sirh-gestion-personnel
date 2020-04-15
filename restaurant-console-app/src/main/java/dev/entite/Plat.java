@@ -1,16 +1,20 @@
 package dev.entite;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
- * Classe de Plat
+ * Entité de Plat
  * 
  * @author Salaheddine El Majdooub
  *
@@ -29,7 +33,15 @@ public class Plat {
 	@Column(name = "prixEnCentimesEuros")
 	private Integer prixEnCentimesEuros;
 
+	@ManyToMany
+	@JoinTable(name = "plat_ingredient", joinColumns = @JoinColumn(name = "plat_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id", referencedColumnName = "id"))
+	private List<Ingredient> ingredients = new ArrayList<>();
+
 	public Plat() {
+	}
+
+	public Plat(String nom) {
+		this.nom = nom;
 	}
 
 	public Plat(String nom, Integer prixEnCentimesEuros) {
@@ -37,34 +49,40 @@ public class Plat {
 		this.prixEnCentimesEuros = prixEnCentimesEuros;
 	}
 
+	/**
+	 * Getter
+	 * 
+	 * @return nom de plat
+	 */
 	public String getNom() {
 		return nom;
 	}
 
+	/**
+	 * Setter
+	 * 
+	 * @param nom de plat
+	 */
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 
+	/**
+	 * Getter
+	 * 
+	 * @return le prix en centimes
+	 */
 	public Integer getPrixEnCentimesEuros() {
 		return prixEnCentimesEuros;
 	}
 
+	/**
+	 * Setter
+	 * 
+	 * @param prixEnCentimesEuros
+	 */
 	public void setPrixEnCentimesEuros(Integer prixEnCentimesEuros) {
 		this.prixEnCentimesEuros = prixEnCentimesEuros;
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-		Plat plat = (Plat) o;
-		return nom.equals(plat.nom);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(nom);
-	}
 }
